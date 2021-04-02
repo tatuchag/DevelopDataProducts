@@ -1,0 +1,79 @@
+---
+title: "Brazil_InteractiveMap"
+author: "Renata Guanaes"
+date: "02/04/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Course Project"
+author: "Renata Guanaes Machado"
+date: "02/04/2021"
+output:
+  html_document: default
+  pdf_document: default
+subtitle: Develop Data Products (*from Data Science Specialization*)
+---
+
+
+## **Executive Summary**
+This is a task from **Peer-graded Assignment: R Markdown and Leaflet**, Develop Data Product Course, Week 02.
+
+Create a web page using R Markdown that features a map created with Leaflet. <br>
+Host your webpage on either GitHub Pages, RPubs, or NeoCities. <br>
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity! 
+
+
+### **Libraries**
+
+```{r message=FALSE, warning=FALSE, include=TRUE}
+
+suppressMessages(library(leaflet))
+suppressMessages(library(htmltools))
+suppressMessages(library(readr))
+```
+
+### **Loading Data**
+Brazil Cities Database: List of **50 prominent cities in Brazil**. <br> Each row includes a city's latitude, longitude, state and population, among other variables.
+
+Data from: https://simplemaps.com/data/br-cities
+
+```{r}
+setwd("~/data")
+data <- read.csv(file = "Brazil_475ProminentCities.csv", 
+                    header = TRUE, 
+                    encoding = "UTF-8",
+                    sep = ",")
+
+data <- data[, c(1,2,3,6,8)] # maintain the relevant columns
+colnames(data) <- c('City','Latitude','Longitude','State', 'Population')
+
+# filtering only the 100 most prominent cities
+data100 <- head(data[order(data$Population, decreasing=TRUE),], 100)
+
+head(data100, 5)
+```
+
+
+
+
+```{r}
+data100 %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions()) %>%
+  addMarkers(popup=paste
+              ("<br>State: ", htmlEscape(data100$State),
+               "<br>City: ",  htmlEscape(data100$City),
+               "<br>Population: ",  htmlEscape(data100$Population/1000)
+                          ))
+
+
+
+```
+
+
