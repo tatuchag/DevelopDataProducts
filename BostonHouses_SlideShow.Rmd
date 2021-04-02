@@ -38,8 +38,8 @@ attach(Boston)
 summary(Boston[c('lstat','crim', 'medv')])
 ```
 
-## Plot: Boston Houses - Price (medv) x lower status (Lstat)
-```{r }
+## R Code: Boston Houses - Price (medv) x lower status (Lstat)
+```{r echo = TRUE}
 p1 = plot_ly(Boston, x=lstat, y=medv, 
               type="scatter", 
               mode="markers",
@@ -47,13 +47,18 @@ p1 = plot_ly(Boston, x=lstat, y=medv,
               color = medv,
               colors = 'plasma'
              )
-colorbar(p1)
 
 ```
 
+## Plot: Boston Houses - Price (medv) x lower status (Lstat)
+```{r}
+colorbar(p1)
+```
 
-## Plot: Boston Houses - Price (medv) x Crime Rate
-```{r }
+
+
+## R Code: Boston Houses - Price (medv) x Crime Rate
+```{r echo = TRUE}
 p = plot_ly(Boston, x=crim, y=medv, 
             type="scatter",
             mode="markers",
@@ -61,7 +66,10 @@ p = plot_ly(Boston, x=crim, y=medv,
             color = medv, 
             colors = 'viridis'
         )
+```
 
+## Plot: Boston Houses - Price (medv) x Crime Rate
+```{r}
 colorbar(p)
 ```
 
