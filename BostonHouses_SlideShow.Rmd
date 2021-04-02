@@ -1,0 +1,67 @@
+---
+title: "Creating Markdown Presentation and Plotly Graphs"
+author: "Renata Guanaes"
+date: "02/04/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Project Description
+
+This is a task from **Peer-graded Assignment: R Markdown Presentation & Plotly**, Develop Data Product Course, Week 03.
+
+Create a web page presentation using R Markdown that features a plot created with Plotly. <br><br>
+Host your webpage on either GitHub Pages, RPubs, or NeoCities. <br><br>
+Your webpage must contain the date that you created the document, and it must contain a plot created with Plotly. We would love to see you show off your creativity!
+
+## About dataset
+
+- Dataset: Housing Values in Suburbs of Boston
+- Verify relationship between lower status of the population (lstat) x median value of the house
+- Verify relationship between per capita crime rate (crim) x median value of the house
+
+
+```{r message=FALSE, warning=FALSE, include=TRUE}
+suppressMessages(library(MASS))
+suppressMessages(library(plotly))
+data(Boston)
+attach(Boston) 
+```
+
+
+## Dataset summary
+
+```{r echo = TRUE}
+summary(Boston[c('lstat','crim', 'medv')])
+```
+
+## Plot: Boston Houses - Price (medv) x lower status (Lstat)
+```{r }
+p1 = plot_ly(Boston, x=lstat, y=medv, 
+              type="scatter", 
+              mode="markers",
+              marker = list(size=10, opacity=.9),
+              color = medv,
+              colors = 'plasma'
+             )
+colorbar(p1)
+
+```
+
+
+## Plot: Boston Houses - Price (medv) x Crime Rate
+```{r }
+p = plot_ly(Boston, x=crim, y=medv, 
+            type="scatter",
+            mode="markers",
+            marker = list(size=10, opacity=.9),
+            color = medv, 
+            colors = 'viridis'
+        )
+
+colorbar(p)
+```
+
