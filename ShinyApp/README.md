@@ -48,5 +48,5 @@ The ui.R and server.R are the code for the shiny application: https://renatabdf.
 
 Application Details:
 * The shiny application is deployed on ShinyApps.io server at: https://renatabdf.shinyapps.io/shinyapp/
-* The RStudio presentation slides is published to GitHub at: 
+* The RStudio presentation slides is published to GitHub at: https://github.com/tatuchag/DevelopDataProducts
 * Git repository at: https://github.com/tatuchag/DevelopDataProducts 
